@@ -4,7 +4,7 @@ function removeYouTubeShorts() {
   document.querySelectorAll('ytd-rich-item-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]), ytd-grid-video-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]), ytd-video-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"])').forEach(el => el.remove());
 
   // Select and remove elements from the sidebar/feed that are shorts
-  document.querySelectorAll('ytd-reel-shelf-renderer, ytd-item-section-renderer:has(#shorts-reels-container), ytd-rich-shelf-renderer:has(#shorts-reels-container)').forEach(el => el.remove());
+  document.querySelectorAll('ytd-reel-shelf-renderer, ytd-item-section-renderer:has(#shorts-reels-container), ytd-rich-shelf-renderer[is-shorts], ytd-rich-shelf-renderer:has(#shorts-reels-container)').forEach(el => el.remove());
 
   // Remove the ytd-shorts element
   document.querySelectorAll('ytd-shorts').forEach(el => el.remove());
