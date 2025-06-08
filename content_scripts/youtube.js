@@ -1,5 +1,12 @@
+let isExtensionEnabled = true;
+
 // Function to remove YouTube Shorts elements
 function removeYouTubeShorts() {
+  if (!isExtensionEnabled) {
+    console.log('Extension is disabled. Not removing Shorts elements.');
+    return;
+  }
+
   // Select and remove elements containing "Shorts" on the homepage
   document.querySelectorAll('ytd-rich-item-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]), ytd-grid-video-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]), ytd-video-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"])').forEach(el => el.remove());
 
@@ -32,6 +39,25 @@ function removeYouTubeShorts() {
 if (window.location.href.includes("/shorts/")) {
   window.location.replace("https://www.youtube.com/");
 }
+
+// Initial check and set up listener for extension state
+chrome.storage.local.get('enabled', (data) => {
+  isExtensionEnabled = data.enabled ?? true;
+  if (isExtensionEnabled) {
+    removeYouTubeShorts();
+  }
+});
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  if (namespace === 'local' && changes.enabled !== undefined) {
+    isExtensionEnabled = changes.enabled.newValue;
+    console.log('Extension enabled state changed to:', isExtensionEnabled);
+    // Re-run removal if enabled, or stop if disabled (though stopping observer is complex)
+    if (isExtensionEnabled) {
+      removeYouTubeShorts();
+    }
+  }
+});
 
 // Monitor changes dynamically
 const observer = new MutationObserver(removeYouTubeShorts);

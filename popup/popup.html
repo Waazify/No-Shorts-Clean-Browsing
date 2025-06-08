@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head><link rel="stylesheet" href="popup.css" /></head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>No Shorts - Extension</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
   <body>
-    <h1>No Shorts</h1>
-    <label>
-      <input type="checkbox" id="toggleSwitch" />
-      Enable Extension
-    </label>
+    <header>
+      <div class="logo">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM15.5 11.25C15.5 11.66 15.16 12 14.75 12H9.25C8.84 12 8.5 11.66 8.5 11.25V8.75C8.5 8.34 8.84 8 9.25 8H14.75C15.16 8 15.5 8.34 15.5 8.75V11.25ZM15.5 15.25C15.5 15.66 15.16 16 14.75 16H9.25C8.84 16 8.5 15.66 8.5 15.25V12.75C8.5 12.34 8.84 12 9.25 12H14.75C15.16 12 15.5 12.34 15.5 12.75V15.25Z"
+            fill="currentColor"
+          />
+        </svg>
+        <h1>No Shorts</h1>
+      </div>
+    </header>
+    <main>
+      <section class="toggle-section">
+        <label class="switch">
+          <input type="checkbox" id="toggleSwitch" />
+          <span class="slider round"></span>
+        </label>
+        <span class="toggle-label">Enable Extension</span>
+      </section>
+    </main>
+    <footer>
+      <p>
+        <a
+          href="https://github.com/waazify/no-shorts-clean-browsing"
+          target="_blank"
+          >Learn More</a
+        >
+      </p>
+    </footer>
     <script src="popup.js"></script>
   </body>
 </html>

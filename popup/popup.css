@@ -1,20 +1,134 @@
 body {
-  font-family: Arial, sans-serif;
-  width: 200px;
-  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 280px;
+  padding: 15px;
+  background-color: #f4f7f6;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-label {
+header {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
 }
 
-input[type="checkbox"] {
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo svg {
+  color: #e62117; /* YouTube Red */
   margin-right: 8px;
+}
+
+.logo h1 {
+  font-size: 1.4em;
+  color: #333;
+  margin: 0;
+}
+
+main {
+  padding: 10px 0;
+}
+
+.toggle-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 12px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-label {
+  font-size: 1.1em;
+  color: #555;
+}
+
+/* The switch - adapted from W3Schools */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #e62117; /* YouTube Red */
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #e62117;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 25px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #777;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+footer a {
+  color: #e62117;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }

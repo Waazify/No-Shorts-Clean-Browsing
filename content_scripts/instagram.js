@@ -1,15 +1,15 @@
+let isExtensionEnabled = true;
+
 function removeInstagramReels() {
+  if (!isExtensionEnabled) {
+    console.log('Extension is disabled. Not removing Instagram Reels.');
+    return;
+  }
   // Remove Reels button from sidebar/main feed
   // Remove Reels button by targeting the div containing the 'Reels' text and the link
   document.querySelectorAll('div.x1n2onr6.x6s0dn4.x78zum5:has(a[href="/reels/"])').forEach(el => {
     el.remove();
   });
-
-  // document.querySelectorAll('div.x6s0dn4.x9f619.xxk0z11.x6ikm8r.xeq5yr9.xf7dkkf.x1s85apg.xzzcqpx').forEach(
-  //   el=> {
-  //     el.remove();
-  //   }
-  // )
 
   // Fallback for other Reels elements, if any
   const reelsSvg = document.querySelector('svg[aria-label="Reels"]');
@@ -22,6 +22,10 @@ function removeInstagramReels() {
 }
 
 const removeReelsLinks = () => {
+  if (!isExtensionEnabled) {
+    console.log('Extension is disabled. Not removing Instagram Reels links.');
+    return;
+  }
   document.querySelectorAll('a[href*="/reels/"]').forEach(link => {
     // Remove the parent element of the link, or the link itself if no suitable parent
     if (link.parentElement) {
@@ -34,21 +38,44 @@ const removeReelsLinks = () => {
 
 // Function to redirect from Instagram Reels URLs
 const redirectFromReels = () => {
+  if (!isExtensionEnabled) {
+    console.log('Extension is disabled. Not redirecting from Instagram Reels URLs.');
+    return;
+  }
   if (window.location.pathname.includes('/reels/')) {
     window.location.replace('https://www.instagram.com/');
   }
 };
 
-// Initial removal attempts
-removeInstagramReels();
-removeReelsLinks();
-redirectFromReels();
+// Initial check and set up listener for extension state
+chrome.storage.local.get('enabled', (data) => {
+  isExtensionEnabled = data.enabled ?? true;
+  if (isExtensionEnabled) {
+    removeInstagramReels();
+    removeReelsLinks();
+    redirectFromReels();
+  }
+});
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  if (namespace === 'local' && changes.enabled !== undefined) {
+    isExtensionEnabled = changes.enabled.newValue;
+    console.log('Extension enabled state changed to:', isExtensionEnabled);
+    if (isExtensionEnabled) {
+      removeInstagramReels();
+      removeReelsLinks();
+      redirectFromReels();
+    }
+  }
+});
 
 // Use MutationObserver to remove Reels elements that load later
 const observer = new MutationObserver(() => {
-  removeInstagramReels();
-  removeReelsLinks();
-  redirectFromReels();
+  if (isExtensionEnabled) {
+    removeInstagramReels();
+    removeReelsLinks();
+    redirectFromReels();
+  }
 });
 
 // Observe the document body for changes
@@ -63,5 +90,7 @@ setInterval(redirectFromReels, 1000);
 
 // Redirect if the URL is an Instagram Reel URL
 if (window.location.href.includes("/reel/")) {
-  window.location.replace("https://www.instagram.com/");
+  if (isExtensionEnabled) {
+    window.location.replace("https://www.instagram.com/");
+  }
 }
