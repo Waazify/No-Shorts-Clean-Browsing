@@ -14,7 +14,7 @@ This browser extension aims to remove short-form content from popular social med
 1. Clone this repository or download the ZIP file.
 2. Open your browser's extension management page (e.g., `chrome://extensions` for Chrome).
 3. Enable "Developer mode".
-4. Click "Load unpacked" and select the `remove-shorts-extension` directory.
+4. Click "Load unpacked" and select the `no-shorts-clean-browsing` directory.
 
 ## Usage
 
