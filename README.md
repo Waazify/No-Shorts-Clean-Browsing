@@ -5,8 +5,8 @@ This browser extension aims to remove short-form content from popular social med
 ## Features
 
 - Removes YouTube Shorts from the homepage and feeds.
-- (Planned) Removes Instagram Reels and similar short videos.
-- (Planned) Removes LinkedIn short-form video content.
+- Removes Instagram Reels and similar short videos.
+- Removes LinkedIn short-form video content.
 - Toggle extension functionality on/off via a popup.
 
 ## Installation
