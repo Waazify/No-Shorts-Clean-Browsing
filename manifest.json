@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "No Shorts - Clean Browsing",
+    "version": "1.0",
+    "description": "Remove short-form content from YouTube, Instagram, and LinkedIn.",
+    "permissions": ["storage", "scripting", "activeTab"],
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": "icons/icon_128.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://*.youtube.com/*"],
+        "js": ["content_scripts/youtube.js"],
+        "run_at": "document_idle"
+      },
+      {
+        "matches": ["*://*.instagram.com/*"],
+        "js": ["content_scripts/instagram.js"],
+        "run_at": "document_idle"
+      },
+      {
+        "matches": ["*://*.linkedin.com/*"],
+        "js": ["content_scripts/linkedin.js"],
+        "run_at": "document_idle"
+      }
+    ]
+  }
+  
